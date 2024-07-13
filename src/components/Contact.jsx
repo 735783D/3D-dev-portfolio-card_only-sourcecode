@@ -10,62 +10,9 @@ import { github, linkedin } from "../assets";
 
 const Contact = () => {
   const formRef = useRef();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [form, setForm] = useState({});
 
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
-
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    emailjs
-      .send(
-        'service_nyhdg99',
-        'template_trrtrxq',
-        {
-          from_name: form.name,
-          to_name: "Jason",
-          from_email: form.email,
-          to_email: "jason.whitby@protonmail.com",
-          message: form.message,
-        },
-        'eNgpCOhlNfcBMezJ7'
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
-
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
-          alert("Uhh...something went wrong. Please try again.");
-        }
-      );
-  };
-
-  return (
+    return (
     <div
       className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}>
       <motion.div
@@ -77,58 +24,13 @@ const Contact = () => {
 
         <form
           ref={formRef}
-          onSubmit={handleSubmit}
           className='mt-12 flex flex-col gap-8'
         >
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Name</span>
-            <input
-              type='text'
-              name='name'
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What is your name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your email</span>
-            <input
-              type='email'
-              name='email'
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What is your email address?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-          <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Message</span>
-            <textarea
-              rows={7}
-              name='message'
-              value={form.message}
-              onChange={handleChange}
-              placeholder='What would you like to say?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
-            />
-          </label>
-
-          <button
-            type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
-          >
-            {loading ? "Sending..." : "Send"}
-          </button>
- 
+          
           <div>
-          <div>
-            <p className='text-white font-medium mb-4 justify-center'>There is also LinkedIn and Github as well!</p>
-          </div>
-
           <div className='relative inset-0 flex justify-left m-3 gap-10 card-img_hover'>
             <div onClick={() => window.open("https://www.linkedin.com/in/jason-whitby-mscsia-12x-aws-certified", "_blank")} 
-              className="black-gradient w-12 h-12 rounded-full flex justify-center items-center cursor-pointer">
+              className="black-gradient w-15 h-15 rounded-full flex justify-center items-center cursor-pointer">
               <img
                 src={linkedin}
                 alt="icon"
@@ -136,7 +38,7 @@ const Contact = () => {
               />
             </div>
             <div onClick={() => window.open("https://github.com/735783D", "_blank")} 
-              className="black-gradient w-12 h-12 rounded-full flex justify-center items-center cursor-pointer">
+              className="black-gradient w-15 h-15 rounded-full flex justify-center items-center cursor-pointer">
               <img
                 src={github}
                 alt="icon"
@@ -145,8 +47,6 @@ const Contact = () => {
             </div>
           </div>
         </div>
-
-
         </form>
       </motion.div>
 
